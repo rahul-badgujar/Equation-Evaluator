@@ -1,8 +1,10 @@
-from CommonMaths import SimpleMath
+from Utilities import SimpleMath, clearScreen
+
+# Equation Class models a Equation and provide useful Functions
 
 
 class Equation:
-
+    # Class Variables
     standardEquations = ('{A}x + {B} = 0',
                          '{A}x^2 + {B}x + {C} = 0', '{A}x^3 + {B}x^2 + {C}x + {D} = 0')
 
@@ -12,14 +14,15 @@ class Equation:
         self.solution = list()
 
     def readEquation(self):
-        self.degree = int(input('Enter the Degree of Equation [ 1/2/3 ] : '))
-        print('Enter the corresponding Coefficients for Standard Form ' +
+        clearScreen()
+        self.degree = int(input('\tEnter the Degree of Equation [ 1/2/3 ] : '))
+        print('\tEnter the corresponding Coefficients for Standard Form ' +
               self.getEquation())
         while self.degree+1 < len(self.coefficients):
             self.coefficients.pop()
         for i in range(self.degree+1):
-            self.coefficients[i] = int(input(self.coefficients[i]+' : '))
-        print('The Equation entered is : '+self.getEquation())
+            self.coefficients[i] = int(input('\t'+self.coefficients[i]+' : '))
+        print('T\n\the Equation entered is : '+self.getEquation())
 
     def getEquation(self):
         equation = Equation.standardEquations[self.degree-1]
@@ -33,11 +36,12 @@ class Equation:
             equation = equation.format(
                 A=self.coefficients[0], B=self.coefficients[1], C=self.coefficients[2], D=self.coefficients[3])
         else:
-            print('Max 3 Degree Equations are allowed !!!')
+            print('\tMax 3 Degree Equations are allowed !!!')
         return equation
 
     def solveEquation(self):
-        print('Roots of the Given Equation '+self.getEquation()+' are : ')
+        clearScreen()
+        print('\n\tRoots of the Given Equation '+self.getEquation()+' are : ')
         if self.degree == 1:
             self.solveDegree1()
         elif self.degree == 2:
@@ -58,7 +62,7 @@ class Equation:
         c = self.coefficients[2]
         discriminant = (b**2-4*a*c)
         if discriminant < 0:
-            print('No real roots exits for the Given Equation')
+            print('\tNo real roots exits for the Given Equation')
             return
         root1 = (-b+discriminant**0.5)/(2*a)
         root2 = (-b-discriminant**0.5)/(2*a)
@@ -96,13 +100,14 @@ class Equation:
                     flag = True
                     break
         if flag == False:
-            print('No real roots exits')
+            print('\tNo real roots exits')
 
     def showSolution(self):
         for i in range(self.degree):
-            print('Root '+str(i+1)+' : '+str(self.solution[i]))
+            print('\tRoot '+str(i+1)+' : '+str(self.solution[i]))
 
 
+# For Module Testing, neglet
 if __name__ == '__main__':
     e = Equation()
     e.readEquation()
