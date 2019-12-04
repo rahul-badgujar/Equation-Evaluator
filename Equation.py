@@ -17,20 +17,26 @@ class Equation:
         while True:
             clearScreen()
             try:
-                self.degree = int(input('\tEnter the Degree of Equation [ 1/2/3 ] : '))
-                if self.degree>3 or self.degree<1:
+                self.degree = int(
+                    input('\tEnter the Degree of Equation [ 1/2/3 ] : '))
+                if self.degree > 3 or self.degree < 1:
                     raise Exception('Invalid Degree !')
                 else:
                     break
             except Exception as msg:
-                print('Exception Caught : '+str(msg))
-                continue            
+                print('\tException Caught : '+str(msg))
+                input()
         print('\tEnter the corresponding Coefficients for Standard Form ' +
               self.getEquation())
         while self.degree+1 < len(self.coefficients):
             self.coefficients.pop()
-        for i in range(self.degree+1):
-            self.coefficients[i] = int(input('\t'+self.coefficients[i]+' : '))
+        try:
+            for i in range(self.degree+1):
+                self.coefficients[i] = int(
+                    input('\t'+self.coefficients[i]+' : '))
+        except ValueError:
+            print('\tException Caught : The entered Coefficient Value is not Valid !')
+            input()
         print('T\n\the Equation entered is : '+self.getEquation())
 
     def getEquation(self):

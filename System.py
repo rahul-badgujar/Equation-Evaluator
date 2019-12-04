@@ -59,10 +59,11 @@ class System:
                     System.aboutInfo()
                 elif choice == '3':
                     break
-                if choice not in ['1','2','3']:
+                if choice not in ['1', '2', '3']:
                     raise Exception('Not a Valid Choice !')
             except Exception as msg:
-                print('Exception Caught : '+str(msg))
+                print('\tException Caught : '+str(msg))
+                input()
                 continue
 
             input('\n\tEnter any key to Continue ...')
