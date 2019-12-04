@@ -14,8 +14,17 @@ class Equation:
         self.solution = list()
 
     def readEquation(self):
-        clearScreen()
-        self.degree = int(input('\tEnter the Degree of Equation [ 1/2/3 ] : '))
+        while True:
+            clearScreen()
+            try:
+                self.degree = int(input('\tEnter the Degree of Equation [ 1/2/3 ] : '))
+                if self.degree>3 or self.degree<1:
+                    raise Exception('Invalid Degree !')
+                else:
+                    break
+            except Exception as msg:
+                print('Exception Caught : '+str(msg))
+                continue            
         print('\tEnter the corresponding Coefficients for Standard Form ' +
               self.getEquation())
         while self.degree+1 < len(self.coefficients):
@@ -35,8 +44,6 @@ class Equation:
         elif self.degree == 3:
             equation = equation.format(
                 A=self.coefficients[0], B=self.coefficients[1], C=self.coefficients[2], D=self.coefficients[3])
-        else:
-            print('\tMax 3 Degree Equations are allowed !!!')
         return equation
 
     def solveEquation(self):

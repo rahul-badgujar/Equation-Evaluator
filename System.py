@@ -52,12 +52,17 @@ class System:
         # The Application Loop
         while True:
             choice = System.showMenu()
-            if choice == '1':
-                System.runEvaluator()
-            elif choice == '2':
-                System.aboutInfo()
-            elif choice == '3':
-                break
-            else:
+            try:
+                if choice == '1':
+                    System.runEvaluator()
+                elif choice == '2':
+                    System.aboutInfo()
+                elif choice == '3':
+                    break
+                if choice not in ['1','2','3']:
+                    raise Exception('Not a Valid Choice !')
+            except Exception as msg:
+                print('Exception Caught : '+str(msg))
                 continue
+
             input('\n\tEnter any key to Continue ...')
